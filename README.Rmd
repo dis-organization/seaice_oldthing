@@ -1,0 +1,23 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+# seaice
+
+The goal of seaice is to provide access to sea ice concentration data. 
+
+Now that bowerbird and blueant are able to reliably synchronize these data it's time to unpack the support for these data in raadtools and raadfiles and make a sea ice data specifica package that can be used on its own. 
+
+
+WIP
+

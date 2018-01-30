@@ -1,0 +1,82 @@
+---
+title: "Get sea ice concentration data"
+author: "Michael D. Sumner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Get sea ice concentration data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Here we set up a local directory and set up a job to download complete sea ice concentration
+data sets. 
+
+If necessary, install the `blueant` and `bowerbird` packages as per their readme documents: 
+
+https://github.com/AustralianAntarcticDivision/blueant
+
+## Please note
+
+Please take care to define a location for your files. These collections are large, 
+with 300Mb or more for the near-real-time data, and another 30-40 Gb for the entire collections. 
+
+The download process does take time, I'd expect about 1 hour for the near-real time data alone. On 30 January 2018 at the University of Tasmania this process took 1 hour for the 2249 total files (there will be files for daily data, for both northern and southern hemispheres for at least three years, up to the present). Happily, the update process will always be much quicker since files already obtained will not be re-download (unless they are updated at the source, but this is quite rare in our experience). 
+
+Using bowerbird and blueant for this task is best done when one person commits to maintaining the collection for a local group of researchers, by running the synchronization process regularly the data will be easily available, up to date, and fast to read. However, committing to the entire size of the collection means that this should not be repeated by several people on the same network. 
+
+## seaice 
+
+All that said, if you commit to the download even for just the near-real-time data there's a lot of cool stuff we can do with the seaice package! 
+
+To illustrate with runnable code, here we configure only for the real-time data and set it running. For 
+the entire collection please set the code to define all three sources. 
+
+```{r config-sync, eval=FALSE}
+#sources <- c("Artist AMSR2 near-real-time sea ice concentration", 
+#"NSIDC SMMR-SSM/I Nasateam sea ice concentration", 
+#"NSIDC SMMR-SSM/I Nasateam near-real-time sea ice concentration")
+sources <- "NSIDC SMMR-SSM/I Nasateam near-real-time sea ice concentration"
+library(blueant)
+## define a local file root, this code may be used
+## to identify a predictable location for this package *for a given user*
+local_file_root <- rappdirs::user_data_dir(appname = "seaice")
+
+## create the local directly if it doesn't exist
+if (!file.exists(file_root) & file.info(local_file_root)$isdir) {
+  dir.create(local_file_root)
+}
+config <- bb_config(local_file_root = local_file_root)
+config <- config %>% bb_add(blueant_sources(sources))
+bb_sync(config)
+```
+
+Now see the vignette "Using seaice".   If you changed the value of `local_file_root` there's an additional configuration step to ensure that is discoverable by the seaice package. 
+
+```{r run-sync, eval=FALSE}
+vignette("Using seaice", package = "seaice")
+```
+
+
+## Updating the collection
+
+It's best to set up a synchronization process as an scheduled task, that way the data will be always up to date for whenever you need it!
+
+Given the starting configuration above, we need to run this or its equivalent. We set ours up to run as a cron job every day, and we have a local config file that records our set up. 
+
+```{r,eval=FALSE}
+sources <- "NSIDC SMMR-SSM/I Nasateam near-real-time sea ice concentration"
+library(blueant)local_file_root <- rappdirs::user_data_dir(appname = "seaice")
+config <- bb_config(local_file_root = local_file_root)
+config <- config %>% bb_add(blueant_sources(sources))
+bb_sync(config)
+```
+
+As you grow your collection you will need to keep a record of the named data sources that the configuration must know about, and we hope to include some easier ways for seaice to help with that in future. 

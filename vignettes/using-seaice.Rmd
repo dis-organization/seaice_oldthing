@@ -1,0 +1,41 @@
+---
+title: "Using seaice"
+author: "Michael D. Sumner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using seaice}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The seaice package aims to provide easy access to the most comprehensive data sets of sea ice concentration data available via passive microwave remote sensing. 
+
+Please see the vignette for obtaining the data set/s, `r vignette("get_seaice", package = "seaice")`. 
+
+An easy first step is to read the latest data. 
+
+```{r, eval = FALSE}
+library(seaice)
+southern <- read_south_seaice()
+northern <- read_north_seaice()
+
+op <- par(mfrow = c(2, 1))
+plot(southern, col = palr::icePal(100))
+plot(northern, col = palr::icePal(100))
+par(op)
+
+southern 
+northern
+```
+
+The object returned is a `RasterLayer` from the `raster` package. Note that each object is specific to its hemisphere, these are different map projections and they cannot be plotted together natively. 
+
+The read functions have an argument `latest` set to `TRUE` by default, and so the date of data returned will depend on the last synchronization run of the data, as described in the `get_seaice` data vignette. 
