@@ -2,3 +2,4 @@
 ^\.Rproj\.user$
 ^seaice\.Rproj$
 ^README\.Rmd$
+^inst/examples/*.gif$
