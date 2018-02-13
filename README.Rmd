@@ -20,7 +20,7 @@ Seaice uses [bowerbird and blueant](https://github.com/AustralianAntarcticDivisi
 
 Currently the file cataloguing and data read is restricted to the northern polar data, although both polar regions are downloaded, and updated when re-running `bb_sync` (see the vignettes). 
 
-This project aims to separate out similar functionality in the institutional packages [raadtools and raadfiles]((https://github.com/AustralianAntarcticDivision/raadtools) that provide a powerful but not generally accessible set of data tools. 
+This project aims to separate out similar functionality in the institutional packages [raadtools and raadfiles](https://github.com/AustralianAntarcticDivision/raadtools) that provide a powerful but not generally accessible set of data tools. 
 
 ## Installation
 
