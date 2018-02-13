@@ -29,7 +29,7 @@ An easy first step is to read the latest data.
 
 ```{r, eval = FALSE}
 library(seaice)
-southern <- read_south_seaice()
+#southern <- read_south_seaice()
 northern <- read_north_seaice()
 
 op <- par(mfrow = c(2, 1))

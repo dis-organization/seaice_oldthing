@@ -48,16 +48,16 @@ read_north_seaice <- function(date, latest = TRUE, ...) {
                                            tz = "GMT"))
   rng <- as.character(range(files$date))
 
-  if (latest) {
+  if (missing(date) && latest) {
     files <- tail(files, 1)
     date <- files$date
   }
-  if (!latest && is.missing(date)) {
+  if (missing(date) && !latest) {
     files <- head(files, 1)
     date <- files$date
-  } else {
-    date <- as.POSIXct(date, tz = "GMT")
   }
+
+  date <- as.POSIXct(date, tz = "GMT")
 
   files <- files[findInterval(date, files$date), ]
   files <- distinct(files)

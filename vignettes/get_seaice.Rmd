@@ -79,6 +79,7 @@ sources <- "NSIDC SMMR-SSM/I Nasateam near-real-time sea ice concentration"
 library(blueant)
 local_file_root <- rappdirs::user_data_dir(appname = "seaice")
 config <- bb_config(local_file_root = local_file_root)
+## blueant_sources will change to sources()
 config <- config %>% bb_add(blueant_sources(sources))
 bb_sync(config)
 ```
