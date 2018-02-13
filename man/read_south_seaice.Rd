@@ -21,8 +21,8 @@ read_north_seaice(date, latest = TRUE, ...)
 RasterLayer
 }
 \description{
-`read_south_seaice` will read daily sea ice concentration data for the southern hemisphere
-`read_north_seaice` will read daily sea ice concentration data for the northern hemisphere
+`read_south_seaice` for the southern hemisphere
+`read_north_seaice`  for the northern hemisphere
 }
 \examples{
 \dontrun{
@@ -30,4 +30,9 @@ if (seaice_files_available()) {
 read_south_seaice(latest = FALSE)
 }
 }
+# w <- sp::spTransform(wrld_simpl, projection(read_north_seaice()))
+#image(read_north_seaice("2017-01-01"), col = viridis::viridis(100), asp = 1)
+#plot(w, add = T)
+#image(read_north_seaice(latest = T), col = viridis::viridis(100), asp = 1)
+#plot(w, add = T)
 }

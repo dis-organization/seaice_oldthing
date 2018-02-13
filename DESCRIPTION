@@ -9,9 +9,12 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 ByteCompile: true
-Imports:  
-    rappdirs, 
-    tibble
+Imports: 
+    rappdirs,
+    tibble,
+    raster,
+    dplyr,
+    stringr
 Suggests: 
     testthat,
     knitr,

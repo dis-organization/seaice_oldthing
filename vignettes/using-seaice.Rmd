@@ -20,6 +20,11 @@ The seaice package aims to provide easy access to the most comprehensive data se
 
 Please see the vignette for obtaining the data set/s, `r vignette("get_seaice", package = "seaice")`. 
 
+In that vignette we defined a variable `local_file_root` which now we need to persist. 
+
+```{r}
+
+```
 An easy first step is to read the latest data. 
 
 ```{r, eval = FALSE}

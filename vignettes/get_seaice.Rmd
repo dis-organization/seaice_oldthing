@@ -5,8 +5,10 @@ date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Get sea ice concentration data}
-  %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r setup, include = FALSE}
@@ -50,9 +52,10 @@ library(blueant)
 local_file_root <- rappdirs::user_data_dir(appname = "seaice")
 
 ## create the local directly if it doesn't exist
-if (!file.exists(file_root) & file.info(local_file_root)$isdir) {
-  dir.create(local_file_root)
+if (!file.exists(local_file_root) || file.info(local_file_root)$isdir) {
+  dir.create(local_file_root ,recursive = TRUE)
 }
+## /home/rstudio-user/.local/share/seaice
 config <- bb_config(local_file_root = local_file_root)
 config <- config %>% bb_add(blueant_sources(sources))
 bb_sync(config)
@@ -73,7 +76,8 @@ Given the starting configuration above, we need to run this or its equivalent. W
 
 ```{r,eval=FALSE}
 sources <- "NSIDC SMMR-SSM/I Nasateam near-real-time sea ice concentration"
-library(blueant)local_file_root <- rappdirs::user_data_dir(appname = "seaice")
+library(blueant)
+local_file_root <- rappdirs::user_data_dir(appname = "seaice")
 config <- bb_config(local_file_root = local_file_root)
 config <- config %>% bb_add(blueant_sources(sources))
 bb_sync(config)
