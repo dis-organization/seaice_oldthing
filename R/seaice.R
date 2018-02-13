@@ -35,7 +35,9 @@ read_north_seaice <- function(date, latest = TRUE, ...) {
   datadir <- get_local_file_root()
   if (nrow(files) < 1) {
     test <- yesno::yesno(sprintf("no seaice files available, \ndownload and install files to: \n%s?", datadir))
-    if (test) run_bb_sync()
+    if (test) {
+      stop("auto-synch not enabled, see vignette 'get_seaice' for manual config")
+    }
   }
  files <- filter(files, str_detect(.data$fullname, "sidads"))
   files <- filter(files, str_detect(.data$fullname, "bin$"))
