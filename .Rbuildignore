@@ -3,3 +3,5 @@
 ^seaice\.Rproj$
 ^README\.Rmd$
 ^inst/examples/*.gif$
+^data-raw$
+^*.tar.gz$
